@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id           Int      @id @default(autoincrement())
+  booking_date DateTime
+  amount       Float
+  cancel_date  DateTime
+  traveler     Traveler @relation(fields: [travelerId], references: [id])
+  travelerId   Int
+  Payment      Payment?
+  Property     Property @relation(fields: [propertyId], references: [id])
+  propertyId   Int      @unique
+
+  @@map(name: "booking")
+}
+
+model Host {
+  id                 Int        @id @default(autoincrement())
+  name               String     @db.VarChar(255)
+  email              String     @db.VarChar(255)
+  phone_no           Int
+  cnic               String     @db.VarChar(255)
+  property_documents String     @db.VarChar(255)
+  created            DateTime   @default(now())
+  updated            DateTime   @updatedAt
+  deleted            DateTime
+  password           String     @db.VarChar(255)
+  confirm_password   String     @db.VarChar(255)
+  verified           Boolean
+  payment            Payment[]
+  Login              Login?
+  property           Property[]
+
+  @@map(name: "host")
+}
+
+model Login {
+  id         Int      @id @default(autoincrement())
+  email      String   @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  host       Host     @relation(fields: [hostId], references: [id])
+  hostId     Int      @unique
+  traveler   Traveler @relation(fields: [travelerId], references: [id])
+  travelerId Int      @unique
+
+  @@map(name: "login")
+}
+
+model Cities {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  Property Property[]
+
+  @@map("name:cities")
+}
+
+model Payment {
+  id            Int            @id @default(autoincrement())
+  date          DateTime
+  booking       Booking        @relation(fields: [bookingId], references: [id])
+  bookingId     Int            @unique
+  Host          Host           @relation(fields: [hostId], references: [id])
+  hostId        Int
+  payment_types Payment_type[]
+  Traveler      Traveler       @relation(fields: [travelerId], references: [id])
+  travelerId    Int
+
+  @@map(name: "payment")
+}
+
+model Payment_type {
+  id          Int     @id @default(autoincrement())
+  credit_card String  @db.VarChar(255)
+  jazzcash    Float
+  debit_card  String  @db.VarChar(255)
+  cash        Float
+  easypaisa   Float
+  Payment     Payment @relation(fields: [paymentId], references: [id])
+  paymentId   Int
+
+  @@map(name: "payment_type")
+}
+
+model Property {
+  id                   Int                @id @default(autoincrement())
+  property_name        String             @db.VarChar(255)
+  property_description String
+  price                Int
+  created              DateTime           @default(now())
+  updated              DateTime           @updatedAt
+  deleted              DateTime
+  property_image       Bytes              @db.Blob
+  travelerId           Int
+  TravelerId           Traveler           @relation(fields: [travelerId], references: [id])
+  property_reviews     Property_review[]
+  Host                 Host               @relation(fields: [hostId], references: [id])
+  hostId               Int
+  Booking              Booking?
+  Cities               Cities             @relation(fields: [citiesId], references: [id])
+  citiesId             Int
+  Property_amanities   Property_amanity[]
+
+  Property_category   Property_category @relation(fields: [property_categoryId], references: [id])
+  property_categoryId Int
+  @@map(name: "property")
+}
+
+model Property_category {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  properties Property[]
+}
+
+model Property_amanity {
+  id          Int      @id @default(autoincrement())
+  images      Bytes    @db.Blob
+  description String   @db.VarChar(255)
+  property    Property @relation(fields: [propertyId], references: [id])
+  propertyId  Int
+
+  @@map(name: "property_amanity")
+}
+
+model Property_review {
+  id         Int      @id @default(autoincrement())
+  rating     Int
+  text       String
+  traveler   Traveler @relation(fields: [travelerId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
+  travelerId Int
+  propertyId Int
+
+  @@map(name: "property_review")
+}
+
+model Traveler {
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
+  email            String            @db.VarChar(255)
+  address          String            @db.VarChar(255)
+  cnic             String            @db.VarChar(255)
+  phone_no         String            @db.VarChar(255)
+  password         String            @db.VarChar(255)
+  confirm_password String            @db.VarChar(255)
+  passport         String            @db.VarChar(255)
+  verified         Boolean
+  Properties       Property[]
+  property_reviews Property_review[]
+  Booking          Booking[]
+  Login            Login?
+  Payment          Payment[]
+
+  @@map(name: "traveler")
+}
