@@ -59,7 +59,7 @@ function Step8() {
                     </label>
                 </div>
                 </div>
-                <div className="flex pt-20 justify-between mr-5">
+                <div className="flex pt-16 pb-7 justify-between mr-5">
                     <button onClick={goToStep7} className="left-4 text-md bg-[#b5838d] px-6 font-[Poppins] py-2 shadow-md inline-block rounded-full font-bold  text-white ">Back</button>
                     <button onClick={goToStep9} className="text-md bg-[#b5838d] px-6 font-[Poppins] py-2 shadow-md inline-block rounded-full font-bold text-white">Next
                     </button>

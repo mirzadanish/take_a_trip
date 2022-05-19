@@ -16,11 +16,11 @@ export default function Home() {
       <Banner />
         <div className="pt-16 pl-24 pr-24 pb-16">        
           <h3 className="font-[Poppins] text-2xl pb-10 font-extrabold text-secondary">Best Places in Pakistan</h3>
-          <div className="h-96 flex sm:space-x-6 md:space-x-8 lg:space-x-10">
-          <Cards className="bg-[#FFCDB2]" imgUrl={'/lahore.jpg'} city="Lahore" distance="7km away"></Cards>
-          <Cards className="bg-[#FFB4A2]" imgUrl={'/murree.png'} city="Murree" distance="7km away"/>
-          <Cards className="bg-[#E5989B]" imgUrl={'/isl.jpg'} city="Islamabad" distance="7km away"/>
-          <Cards className="bg-[#B5838D]" imgUrl={'/karachi.jpg'} city="Karachi" distance="10km away"/>
+          <div className="h-full flex sm:space-x-6 md:space-x-8 lg:space-x-10">
+          <Cards imgUrl={'/lahore.jpg'} city="Lahore" distance="7km away"/>
+          <Cards imgUrl={'/murree.png'} city="Murree" distance="7km away"/>
+          <Cards imgUrl={'/isl.jpg'} city="Islamabad" distance="7km away"/>
+          <Cards imgUrl={'/karachi.jpg'} city="Karachi" distance="10km away"/>
           </div>
         </div>
       <Footer />
