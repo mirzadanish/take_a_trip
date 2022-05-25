@@ -3,9 +3,12 @@ import Cards from '../components/Cards'
 import Header from '../components/Header'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter()
   return (
+    
     <div>
       <Head>
         <title>Take a Trip</title>

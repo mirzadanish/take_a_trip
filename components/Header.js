@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link';
 import React from 'react'
 import { SearchIcon, MenuIcon, UsersIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
@@ -44,7 +45,7 @@ function Header({ placeholder }) {
 
   const searchPlaces = () => {
     router.push({
-      pathname: "/Search",
+      pathname: "/Property",
       query: {
         location: search,
         startDate: startDate.toISOString(),
@@ -65,11 +66,11 @@ function Header({ placeholder }) {
 
 
       {/* Middle section */}
-      <div className="hidden lg:flex items-center whitespace-nowrap justify-center space-x-10 text-white font-[Poppins] text-xs font-bold w-100">
-      <p className="cursor-pointer hover:border-b">Places to Stay</p>
-        <p className="cursor-pointer hover:border-b">About</p>
-        <p className="cursor-pointer hover:border-b">Help</p>
-        <p className="cursor-pointer hover:border-b">Become a host</p>
+      <div className="hidden lg:flex items-center whitespace-nowrap justify-center space-x-10 text-white font-[Poppins] text-sm font-bold w-100">
+        <Link href="" className="cursor-pointer hover:border-b">Places to Stay</Link>
+        <Link href="/AboutUs" className="cursor-pointer hover:border-b">About</Link>
+        <Link href="" className="cursor-pointer hover:border-b">Help</Link>
+        <Link href="/Become_a_Host/Step1" className="cursor-pointer hover:border-b">Become a host</Link>
       </div>
 
       {/* Right section */}
