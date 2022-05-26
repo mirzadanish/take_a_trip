@@ -101,7 +101,6 @@ export default class Property extends Component {
     };
 
     handleStdAmenities = (position) =>{
-        console.log("this is standout amenity", this.state.stdAmenities);
         const updatedCheckedState = this.state.stdAmenities.map((item,index)=>
             index === position ? !item : item
         );
@@ -112,7 +111,6 @@ export default class Property extends Component {
     }
 
     handleGuestFvrt = (position) =>{
-        console.log("this is guest favourite", this.state.guestFvrt);
         const updatedCheckedState = this.state.guestFvrt.map((item,index)=>
             index === position ? !item : item
         );
@@ -123,7 +121,6 @@ export default class Property extends Component {
     }
 
     handleSafetyItems = (position) =>{
-        console.log("this is safety item", this.state.safetyItems);
         const updatedCheckedState = this.state.safetyItems.map((item,index)=>
             index === position ? !item : item
         );
