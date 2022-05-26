@@ -60,49 +60,6 @@ const Step6 = ({ prevStep,
                 );
               })}
             </div>
-           {/* <div className="flex flex-col space-y-1">
-              <label className="inline-block text-secondary">
-                Pool
-                <input
-                  className="float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-primary bg-white bg-transparent align-top transition duration-200 checked:border-secondary checked:bg-primary focus:outline-none"
-                  type="checkbox"
-                  value=""
-                />
-              </label>
-
-              <label className="inline-block text-secondary">
-                Fire pit
-                <input
-                  className=" float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-primary bg-white bg-transparent align-top transition duration-200 checked:border-secondary checked:bg-primary focus:outline-none"
-                  type="checkbox"
-                  value=""
-                />
-              </label>
-              <label className=" inline-block text-secondary">
-                BBQ grill
-                <input
-                  className=" float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-primary bg-white bg-transparent align-top transition duration-200 checked:border-secondary checked:bg-primary focus:outline-none"
-                  type="checkbox"
-                  value=""
-                />
-              </label>
-              <label className="inline-block text-secondary">
-                Exercise Equipment
-                <input
-                  className=" float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-primary bg-white align-top transition duration-200 checked:border-secondary checked:bg-primary focus:outline-none"
-                  type="checkbox"
-                  value=""
-                />
-              </label>
-              <label className=" inline-block text-secondary">
-                Pool table
-                <input
-                  className=" float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-primary bg-white align-top transition duration-200 checked:border-secondary checked:bg-primary focus:outline-none"
-                  type="checkbox"
-                  value=""
-                />
-              </label>
-          </div> */}
           </div>
 
           <div>

@@ -93,6 +93,9 @@ model Property {
   property_name        String             @db.VarChar(255)
   property_description String
   price                Int
+  guests               Int
+  beds                 Int
+  bathrooms            Int
   created              DateTime           @default(now())
   updated              DateTime           @updatedAt
   deleted              DateTime
@@ -114,16 +117,18 @@ model Property {
 
 model Property_category {
   id         Int        @id @default(autoincrement())
-  name       String     @unique
+  type       String     @unique
+  subType    String     @unique
   properties Property[]
+
+  @@map(name: "property_category")
 }
 
 model Property_amanity {
-  id          Int      @id @default(autoincrement())
-  images      Bytes    @db.Blob
-  description String   @db.VarChar(255)
-  property    Property @relation(fields: [propertyId], references: [id])
-  propertyId  Int
+  id          Int        @id @default(autoincrement())
+  images      Bytes      @db.Blob
+  description String     @db.VarChar(255)
+  properties  Property[]
 
   @@map(name: "property_amanity")
 }

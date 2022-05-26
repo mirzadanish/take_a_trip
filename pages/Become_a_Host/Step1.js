@@ -32,9 +32,7 @@ const Step1 = ({ nextStep, handleChange, values }) => {
     router.push("/");
   };
   const goToStep2 = () => {
-    // console.log("lj;lkj;lj;lk;");
     nextStep();
-    // router.push("/Become_a_Host/Step2");
   };
 
   return (
