@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Step1 = ({ nextStep, handleChange, values }) => {
@@ -9,24 +10,37 @@ const Step1 = ({ nextStep, handleChange, values }) => {
     {
       id: 1,
       name: "Home",
-      image: "House.jpg",
+      image: "Home.jfif",
     },
     {
       id: 2,
       name: "Vacation Home",
-      image: "Apartment.jpg",
+      image: "VacationHome.jfif",
     },
     {
       id: 3,
       name: "Cottage",
-      image: "PrivateRoom.jpg",
+      image: "Cottage.jfif",
     },
     {
       id: 4,
       name: "Apartment",
-      image: "HotelRoom.jpg",
+      image: "Apartment.jfif",
     },
   ];
+
+  // const submitData = async (event) =>{
+  //   event.preventDefault();
+  //   const respnose = await axios.get('http://localhost:5000/api/host/addproperty',
+  //   {
+  //     category
+  //   },
+  //   {
+  //     'Content-Type': 'application/json'
+  //   }
+  // )
+  // console.log(respnose)
+  // }
 
   const goToHome = () => {
     router.push("/");
@@ -58,7 +72,7 @@ const Step1 = ({ nextStep, handleChange, values }) => {
             return (
               <button
                 key={cat.id}
-                onClick={handleChange("category")}
+                onClick={handleChange(cat)}
                 type="button"
                 className="hover:bg-gray-80 w-full rounded-full border border-gray-400 bg-white px-5 py-4 text-lg font-medium text-secondary focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-700"
               >
@@ -67,13 +81,13 @@ const Step1 = ({ nextStep, handleChange, values }) => {
                   <Image
                     className="items-end justify-end rounded"
                     src={`/${cat.image}`}
-                    height="35"
-                    width="35"
+                    height="45"
+                    width="50"
                     alt="House image"
                   />
                 </div>
               </button>
-            );
+            ); 
           })}
         </div>
 

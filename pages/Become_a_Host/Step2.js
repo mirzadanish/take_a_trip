@@ -16,7 +16,7 @@ const Step2 = ({ prevStep, nextStep, handleChange, values }) => {
     },
     {
       id: 3,
-      name: "A Shared Room",
+      name: "A Shared Place",
     },
   ];
 
