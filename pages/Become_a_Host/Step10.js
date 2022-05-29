@@ -42,6 +42,7 @@ const Step10 = ({ prevStep, nextStep, values }) => {
               <h2 className="m-2 pt-2 text-center  text-lg font-bold">
                 {values.propTitle}
               </h2>
+              <h2> {values.category}</h2>
               <h2 className="text-md m-2 pt-2  text-left font-semibold">
                 Property hosted by hostName
               </h2>

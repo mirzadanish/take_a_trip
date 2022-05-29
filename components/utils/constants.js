@@ -5,11 +5,19 @@ export const Security = [
     },
     {
         id: 2,
-        name: "Weapons",
+        name: "Parking area",
     },
     {
         id: 3,
-        name: "Dangerous Animals",
+        name: "Pets allowed",
+    },
+    {
+        id: 4,
+        name: "Smart TV",
+    },
+    {
+        id:5,
+        name: "Wifi",
     },
 ];
 export const StdAmenities = [
@@ -38,11 +46,11 @@ export const StdAmenities = [
 export const GuestFavrt = [
     {
         id: 1,
-        name: "Television",
+        name: "Bedroom essentials",
     },
     {
         id: 2,
-        name: "Wifi",
+        name: "Bathroom essentials",
     },
     {
         id: 3,

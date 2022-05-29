@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -42,6 +43,22 @@ export default class Property extends Component {
         const { step } = this.state;
         this.setState({ step: step + 1 });
     };
+
+    // Save = async () => {
+    //     const respnose = await axios.post('http://localhost:5000/api/host/addproperty', {
+    //         category, description, address, guests, beds, bathrooms, securityCameras,
+    //         parkingArea, petsAllowed, smartTv, wifi, pool, fireplace, bbqGrill,
+    //         exerciseEquipment, poolTable, bedroomEssentials, bathroomEssentials, kitchen,
+    //         washingMachine, airConditioner, workSpace, fireAlarm, fireExtinguisher,
+    //         firstAidKit, smokeAlarm, propertyImages, propTitle, price,
+    //         propDescription, propDocs
+    //     },
+    //       {
+    //         'Content-Type': 'application/json'
+    //       }
+    //     )
+    //     console.log(respnose)
+    //   }
 
     // Handle fields change
     handleChange = (input) => (e) => {
@@ -178,6 +195,7 @@ export default class Property extends Component {
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
                         values={values}
+                        
                     />
                 );
             case 2:

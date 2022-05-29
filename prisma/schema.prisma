@@ -89,43 +89,70 @@ model Payment_type {
 }
 
 model Property {
-  id                   Int                @id @default(autoincrement())
-  property_name        String             @db.VarChar(255)
+  id                   Int               @id @default(autoincrement())
+  property_name        String            @db.VarChar(255)
   property_description String
   price                Int
-  created              DateTime           @default(now())
-  updated              DateTime           @updatedAt
+  guests               Int
+  beds                 Int
+  bathrooms            Int
+  verified             Boolean
+  document             Bytes
+  created              DateTime          @default(now())
+  updated              DateTime          @updatedAt
   deleted              DateTime
-  property_image       Bytes              @db.Blob
+  property_image       Bytes             @db.Blob
+  pool                 Boolean
+  fire_place           Boolean
+  bbq_grill            Boolean
+  exercise_equipment   Boolean
+  pool_table           Boolean
+  smart_TV             Boolean
+  wifi                 Boolean
+  kitchen              Boolean
+  washing_machine      Boolean
+  air_conditioner      Boolean
+  workspace            Boolean
+  fire_alarm           Boolean
+  fire_extinguisher    Boolean
+  first_aid_kit        Boolean
+  smoke_alarm          Boolean
+  security_cameras     Boolean
+  pets_allowed         Boolean
+  parking_area         Boolean
+  bedroom_essentials   Boolean
+  bathroom_essentials  Boolean
   travelerId           Int
-  TravelerId           Traveler           @relation(fields: [travelerId], references: [id])
+  TravelerId           Traveler          @relation(fields: [travelerId], references: [id])
   property_reviews     Property_review[]
-  Host                 Host               @relation(fields: [hostId], references: [id])
+  Host                 Host              @relation(fields: [hostId], references: [id])
   hostId               Int
   Booking              Booking?
-  Cities               Cities             @relation(fields: [citiesId], references: [id])
-  citiesId             Int
-  Property_amanities   Property_amanity[]
 
-  Property_category   Property_category @relation(fields: [property_categoryId], references: [id])
-  property_categoryId Int
+  Cities   Cities? @relation(fields: [citiesId], references: [id])
+  citiesId Int?
+
+  Property_category   Property_category? @relation(fields: [property_categoryId], references: [id])
+  property_categoryId Int?
+  Sub_type            Sub_type?          @relation(fields: [sub_typeId], references: [id])
+  sub_typeId          Int?
   @@map(name: "property")
 }
 
 model Property_category {
   id         Int        @id @default(autoincrement())
-  name       String     @unique
+  type       String     @unique
   properties Property[]
+
+  @@map(name: "property_category")
 }
 
-model Property_amanity {
-  id          Int      @id @default(autoincrement())
-  images      Bytes    @db.Blob
-  description String   @db.VarChar(255)
-  property    Property @relation(fields: [propertyId], references: [id])
-  propertyId  Int
+model Sub_type {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  properties Property[]
 
-  @@map(name: "property_amanity")
+  @@map(name: "sub_type")
 }
 
 model Property_review {
