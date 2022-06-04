@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import React from "react";
 
-const Step9 = ({ prevStep, nextStep, handleChange, values }) => {
+const Step9 = ({ prevStep, nextStep,handlePropDocs,handleDocsUpload, handleImgUpload, handlePropImg, handleChange, values }) => {
   const router = useRouter();
   const goToStep8 = () => {
     prevStep();
@@ -40,8 +40,14 @@ const Step9 = ({ prevStep, nextStep, handleChange, values }) => {
               className=" justify-center opacity-25"
             />
             <div className=" pt-5 pb-7 text-secondary">
-              <input type="file" className=" outline-none" /> <br></br>
-              <button className="pt-3 underline">
+              <input 
+              onChange={handlePropDocs}
+              type="file" 
+              className=" outline-none" 
+              /> <br></br>
+              <button 
+              onClick={handleDocsUpload}
+              className="pt-3 underline">
                 Upload your Property Document here
               </button>
             </div>

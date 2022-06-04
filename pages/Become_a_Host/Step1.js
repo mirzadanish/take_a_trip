@@ -3,37 +3,14 @@ import Image from "next/image";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ nextStep, handleChange, values }) => {
+const Step1 = ({ nextStep, handleChange, values, searchCategories }) => {
   const router = useRouter();
-
-  const categories = [
-    {
-      id: 1,
-      name: "Home",
-      image: "Home.jfif",
-    },
-    {
-      id: 2,
-      name: "Vacation Home",
-      image: "VacationHome.jfif",
-    },
-    {
-      id: 3,
-      name: "Cottage",
-      image: "Cottage.jfif",
-    },
-    {
-      id: 4,
-      name: "Apartment",
-      image: "Apartment.jfif",
-    },
-  ];
 
   // const submitData = async (event) =>{
   //   event.preventDefault();
-  //   const respnose = await axios.get('http://localhost:5000/api/host/addproperty',
+  //   const respnose = await axios.post('http://localhost:5000/api/host/addproperty',
   //   {
-  //     category
+  //     type
   //   },
   //   {
   //     'Content-Type': 'application/json'
@@ -68,26 +45,22 @@ const Step1 = ({ nextStep, handleChange, values }) => {
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="space-y-5 pt-20">
-          {categories.map((cat) => {
-            return (
-              <button
-                key={cat.id}
-                onClick={handleChange(cat)}
-                type="button"
-                className="hover:bg-gray-80 w-full rounded-full border border-gray-400 bg-white px-5 py-4 text-lg font-medium text-secondary focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-700"
+          {searchCategories.map(({ type, id }) => {
+            (
+              <label
+                htmlFor="type"
+                key={id}
+                className="w-full text-secondary grid grid-cols-1"
               >
-                <div className="flex justify-between">
-                  <p className="space-between text-xl font-bold" defaultValue={values.category}>{cat.name}</p>
-                  <Image
-                    className="items-end justify-end rounded"
-                    src={`/${cat.image}`}
-                    height="45"
-                    width="50"
-                    alt="House image"
-                  />
-                </div>
-              </button>
-            ); 
+                {type}
+                <input
+                  name="type"
+                  type="radio"
+                  className="text-secondary flex"
+                  onChange={handleChange}
+                />
+              </label>
+            );
           })}
         </div>
 
@@ -111,3 +84,12 @@ const Step1 = ({ nextStep, handleChange, values }) => {
 };
 
 export default Step1;
+
+export async function getServerSideProps() {
+  const searchCategories = await fetch("http://localhost:5000/api/host/category").then(res => res.json());
+  return {
+    props: {
+      searchCategories,
+    },
+  };
+}
