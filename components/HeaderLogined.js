@@ -70,7 +70,7 @@ function HeaderLogined({ placeholder }) {
         <Link href="" className="cursor-pointer hover:border-b">Places to Stay</Link>
         <Link href="/AboutUs" className="cursor-pointer hover:border-b">About</Link>
         <Link href="" className="cursor-pointer hover:border-b">Help</Link>
-        <Link href="/Become_a_Host/Step1" className="cursor-pointer hover:border-b">Become a host</Link>
+        <Link href="/Become_a_Host/Property" className="cursor-pointer hover:border-b">Become a host</Link>
       </div>
 
       {/* Right section */}

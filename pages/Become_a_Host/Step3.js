@@ -5,11 +5,9 @@ import { useRouter } from "next/router";
 const Step3 = ({ prevStep, nextStep, handleChange, values }) => {
   const router = useRouter();
   const goToStep2 = () => {
-    // router.push("/Become_a_Host/Step2");
     prevStep();
   };
   const goToStep4 = () => {
-    // router.push("/Become_a_Host/Step4");
     nextStep();
   };
   return (
@@ -31,21 +29,30 @@ const Step3 = ({ prevStep, nextStep, handleChange, values }) => {
       </div>
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="flex flex-col space-y-1">
-          <button
-            type="button"
-            className="hover:bg-gray-80  w-full  rounded-full   border border-gray-400 bg-white  px-3 py-2 text-lg   text-secondary focus:ring-4 focus:ring-gray-200  dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-700"
-          >
-            <div className="flex justify-center">
-              <input
-                type={"text"}
-                defaultValue={values.Imageaddress}
-                className="border-0 font-extralight outline-0"
-                placeholder="Enter your address"
-                onChange={handleChange("address")}
-              />
-            </div>
-          </button>
+        <div className="flex flex-col text-secondary space-y-1">
+          <h1 className=" text-center font-bold text-xl pt-28">Enter the address of your Location</h1>
+          <div>
+          <label htmlFor="address" className="flex flex-col pt-3 ">
+            Address
+            <input
+              name="address"
+              type="text"
+              className="border mt-4 p-3 border-secondary rounded-3xl font-light"
+              placeholder="Enter your address"
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="city" className="flex flex-col pt-3">
+            City
+            <input
+              name="city"
+              type="text"
+              className="border mt-4 p-3  border-secondary rounded-3xl font-light"
+              placeholder="Enter your city"
+              onChange={handleChange}
+            />
+          </label>
+        </div>
         </div>
 
         <div className="mr-5 flex justify-between pt-6 pb-7">

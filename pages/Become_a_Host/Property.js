@@ -10,27 +10,31 @@ import Step7 from "./Step7";
 import Step8 from "./Step8";
 import Step9 from "./Step9";
 import Step10 from "./Step10";
-import { Security,StdAmenities, SafetyItems, GuestFavrt } from "../../components/utils/constants";
+import { Security, StdAmenities, SafetyItems, GuestFavrt } from "../../components/utils/constants";
 
 export default class Property extends Component {
-    state = {
-        step: 1,
-        category: "",
-        description: "",
-        address: "",
-        guests: 0,
-        beds: 0,
-        bathrooms: 0,
-        security: new Array(Security.length).fill(false),
-        stdAmenities: new Array(StdAmenities.length).fill(false),
-        guestFvrt: new Array(GuestFavrt.length).fill(false),
-        safetyItems: new Array(SafetyItems.length).fill(false),
-        propertyImages: "",
-        propTitle: "",
-        propPrice: "",
-        propDescription: "",
-        propDocs: "",
-    };
+    constructor() {
+        super()
+        this.state = {
+            step: 1,
+            category: "",
+            description: "",
+            address: "",
+            city: "",
+            guests: 0,
+            beds: 0,
+            bathrooms: 0,
+            security: new Array(Security.length).fill(false),
+            stdAmenities: new Array(StdAmenities.length).fill(false),
+            guestFvrt: new Array(GuestFavrt.length).fill(false),
+            safetyItems: new Array(SafetyItems.length).fill(false),
+            propertyImages: "",
+            propTitle: "",
+            propPrice: "",
+            propDescription: "",
+            propDocs: "",
+        };
+    }
 
     // go back to previous step
     prevStep = () => {
@@ -108,17 +112,17 @@ export default class Property extends Component {
     };
 
     handleSecurity = (position) => {
-        const updatedCheckedState = this.state.security.map((item, index) => 
+        const updatedCheckedState = this.state.security.map((item, index) =>
             index === position ? !item : item
-            );
+        );
         this.setState({
             security: updatedCheckedState,
         });
         console.log("this is security", updatedCheckedState);
     };
 
-    handleStdAmenities = (position) =>{
-        const updatedCheckedState = this.state.stdAmenities.map((item,index)=>
+    handleStdAmenities = (position) => {
+        const updatedCheckedState = this.state.stdAmenities.map((item, index) =>
             index === position ? !item : item
         );
         this.setState({
@@ -127,8 +131,8 @@ export default class Property extends Component {
         console.log("this is standout amenity", updatedCheckedState);
     }
 
-    handleGuestFvrt = (position) =>{
-        const updatedCheckedState = this.state.guestFvrt.map((item,index)=>
+    handleGuestFvrt = (position) => {
+        const updatedCheckedState = this.state.guestFvrt.map((item, index) =>
             index === position ? !item : item
         );
         this.setState({
@@ -137,8 +141,8 @@ export default class Property extends Component {
         console.log("this is guest favourite", updatedCheckedState);
     }
 
-    handleSafetyItems = (position) =>{
-        const updatedCheckedState = this.state.safetyItems.map((item,index)=>
+    handleSafetyItems = (position) => {
+        const updatedCheckedState = this.state.safetyItems.map((item, index) =>
             index === position ? !item : item
         );
         this.setState({
@@ -147,6 +151,47 @@ export default class Property extends Component {
         console.log("this is safety item", updatedCheckedState);
     }
 
+    handlePropImg = event => {
+        this.setState({
+            propertyImages: event.target.files[0]
+        })
+    }
+
+    handleImgUpload = () => {
+        const formData = new FormData(); //FormData is default javascript object
+        formData.append('image', this.state.propertyImages, this.state.propertyImages.name)
+        axios.post('IDHR END POINT AYEGA, you have to sort this out teehee', formData,
+            {
+                //will tell us the % amount of image that is loading
+                onUploadProgress: progressEvent => {
+                    console.log('upload progress: ' + Math.round(progressEvent.loaded/progressEvent.total *100) + "%" )
+                }
+            })
+            .then(res => {
+                console.log(res);
+            })
+    }
+
+    handlePropDocs = event => {
+        this.setState({
+            propDocs: event.target.files[0]
+        })
+    }
+
+    handleDocsUpload = () => {
+        const formData = new FormData(); //FormData is default javascript object
+        formData.append('image', this.state.propDocs, this.state.propDocs.name)
+        axios.post('IDHR END POINT AYEGA, you have to sort this out teehee', formData,
+            {
+                //will tell us the % amount of image that is loading
+                onUploadProgress: progressEvent => {
+                    console.log('upload progress: ' + Math.round(progressEvent.loaded/progressEvent.total *100) + "%" )
+                }
+            })
+            .then(res => {
+                console.log(res);
+            })
+    }
 
     componentDidMount() {
         console.log("this is state", this.state);
@@ -158,6 +203,7 @@ export default class Property extends Component {
             category,
             description,
             address,
+            city,
             guests,
             beds,
             bathrooms,
@@ -175,6 +221,7 @@ export default class Property extends Component {
             category,
             description,
             address,
+            city,
             guests,
             beds,
             bathrooms,
@@ -195,7 +242,7 @@ export default class Property extends Component {
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
                         values={values}
-                        
+
                     />
                 );
             case 2:
@@ -263,6 +310,8 @@ export default class Property extends Component {
                         prevStep={this.prevStep}
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
+                        handlePropImg={this.handlePropImg}
+                        handleImgUpload={this.handleImgUpload}
                         values={values}
                     />
                 );
@@ -281,6 +330,8 @@ export default class Property extends Component {
                         prevStep={this.prevStep}
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
+                        handlePropDocs={this.handlePropDocs}
+                        handleDocsUpload={this.handleDocsUpload}
                         values={values}
                     />
                 );

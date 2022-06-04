@@ -47,17 +47,21 @@ const Step2 = ({ prevStep, nextStep, handleChange, values }) => {
       </div>
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className=" space-y-5 pb-12 pt-28">
+      <div className="space-y-5 pt-20">
           {categories.map((cat) => {
             return (
-              <button
+              <label
                 key={cat.id}
-                onClick={handleChange(cat.name)}
-                type="button"
-                className="hover:bg-gray-80 w-full rounded-xl  border  border-gray-400 bg-white px-4  py-5 text-xl font-bold   text-secondary focus:ring-4 focus:ring-gray-200  dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-700"
+                onClick={handleChange(cat)}
+                className="w-full text-secondary grid grid-cols-1"
               >
                 {cat.name}
-              </button>
+                <input
+                  type="radio"
+                  name="category"
+                  className="text-secondary flex"
+                />
+              </label>
             );
           })}
         </div>
