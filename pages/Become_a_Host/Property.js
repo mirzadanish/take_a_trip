@@ -160,7 +160,7 @@ export default class Property extends Component {
     handleImgUpload = () => {
         const formData = new FormData(); //FormData is default javascript object
         formData.append('image', this.state.propertyImages, this.state.propertyImages.name)
-        axios.post('IDHR END POINT AYEGA, you have to sort this out teehee', formData,
+        axios.post('IDHR END POINT AYEGA', formData,
             {
                 //will tell us the % amount of image that is loading
                 onUploadProgress: progressEvent => {
@@ -181,7 +181,7 @@ export default class Property extends Component {
     handleDocsUpload = () => {
         const formData = new FormData(); //FormData is default javascript object
         formData.append('image', this.state.propDocs, this.state.propDocs.name)
-        axios.post('IDHR END POINT AYEGA, you have to sort this out teehee', formData,
+        axios.post('IDHR END POINT AYEGA', formData,
             {
                 //will tell us the % amount of image that is loading
                 onUploadProgress: progressEvent => {
