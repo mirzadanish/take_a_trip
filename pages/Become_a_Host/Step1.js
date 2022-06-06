@@ -86,7 +86,7 @@ const Step1 = ({ nextStep, handleChange, values, searchCategories }) => {
 export default Step1;
 
 export async function getServerSideProps() {
-  const searchCategories = await fetch("http://localhost:5000/api/host/category").then(res => res.json());
+  const searchCategories = await fetch("http://localhost:5000/api/category").then(res => res.json());
   return {
     props: {
       searchCategories,
