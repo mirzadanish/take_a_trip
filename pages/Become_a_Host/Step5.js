@@ -35,7 +35,7 @@ const Step5 = ({
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className=" pb-28 pt-32">
-          <h2 className="pb-3 font-bold text-secondary space-y-3">
+          <h2 className="space-y-3 pb-3 font-bold text-secondary">
             Do you have any of these at your place?
           </h2>
           <div className="flex flex-col">
@@ -49,12 +49,11 @@ const Step5 = ({
                     name={name}
                     value={name}
                     checked={values.security[index]}
-                    onChange={() => handleSecurity(index)}
+                    onChange={() => handleSecurity(index, name)}
                   />
                 </label>
               );
             })}
-                      
           </div>
         </div>
 

@@ -42,7 +42,6 @@ const Step10 = ({ prevStep, nextStep, values }) => {
               <h2 className="m-2 pt-2 text-center  text-lg font-bold">
                 {values.propTitle}
               </h2>
-              <h2> {values.category}</h2>
               <h2 className="text-md m-2 pt-2  text-left font-semibold">
                 Property hosted by hostName
               </h2>
@@ -57,8 +56,13 @@ const Step10 = ({ prevStep, nextStep, values }) => {
                 <li>1</li>
                 <li>2</li>
               </ul>
+
+              <h2 className="pt-2 font-bold ">{values.category}</h2>
+              <h2 className="pt-2 font-bold ">{values.description}</h2>
+
               <h2 className="pt-2 font-bold ">Location</h2>
               <p>{values.address}</p>
+              <p>{values.city}</p>
 
               <p>{values.security}</p>
             </div>

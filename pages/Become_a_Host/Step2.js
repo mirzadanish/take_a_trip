@@ -47,19 +47,20 @@ const Step2 = ({ prevStep, nextStep, handleChange, values }) => {
       </div>
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-      <div className="space-y-5 pt-20">
+        <div className="space-y-5 pt-20">
           {categories.map((cat) => {
             return (
               <label
                 key={cat.id}
-                onClick={handleChange(cat)}
-                className="w-full text-secondary grid grid-cols-1"
+                className="grid w-full grid-cols-1 text-secondary"
               >
                 {cat.name}
                 <input
+                  value={cat.name}
                   type="radio"
                   name="category"
-                  className="text-secondary flex"
+                  className="flex text-secondary"
+                  onChange={handleChange("description")}
                 />
               </label>
             );

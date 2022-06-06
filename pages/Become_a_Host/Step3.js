@@ -29,30 +29,34 @@ const Step3 = ({ prevStep, nextStep, handleChange, values }) => {
       </div>
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="flex flex-col text-secondary space-y-1">
-          <h1 className=" text-center font-bold text-xl pt-28">Enter the address of your Location</h1>
+        <div className="flex flex-col space-y-1 text-secondary">
+          <h1 className=" pt-28 text-center text-xl font-bold">
+            Enter the address of your Location
+          </h1>
           <div>
-          <label htmlFor="address" className="flex flex-col pt-3 ">
-            Address
-            <input
-              name="address"
-              type="text"
-              className="border mt-4 p-3 border-secondary rounded-3xl font-light"
-              placeholder="Enter your address"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="city" className="flex flex-col pt-3">
-            City
-            <input
-              name="city"
-              type="text"
-              className="border mt-4 p-3  border-secondary rounded-3xl font-light"
-              placeholder="Enter your city"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+            <label htmlFor="address" className="flex flex-col pt-3 ">
+              Address
+              <input
+                name="address"
+                type="text"
+                value={values.address}
+                className="mt-4 rounded-3xl border border-secondary p-3 font-light"
+                placeholder="Enter your address"
+                onChange={handleChange("address")}
+              />
+            </label>
+            <label htmlFor="city" className="flex flex-col pt-3">
+              City
+              <input
+                name="city"
+                type="text"
+                value={values.city}
+                className="mt-4 rounded-3xl border  border-secondary p-3 font-light"
+                placeholder="Enter your city"
+                onChange={handleChange("city")}
+              />
+            </label>
+          </div>
         </div>
 
         <div className="mr-5 flex justify-between pt-6 pb-7">

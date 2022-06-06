@@ -3,8 +3,31 @@ import Image from "next/image";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ nextStep, handleChange, values, searchCategories }) => {
+const Step1 = ({ nextStep, handleChange, values }) => {
   const router = useRouter();
+
+  const categories = [
+    {
+      id: 1,
+      name: "Home",
+      image: "House.jpg",
+    },
+    {
+      id: 2,
+      name: "Vacation Home",
+      image: "Apartment.jpg",
+    },
+    {
+      id: 3,
+      name: "Cottage",
+      image: "PrivateRoom.jpg",
+    },
+    {
+      id: 4,
+      name: "Apartment",
+      image: "HotelRoom.jpg",
+    },
+  ];
 
   // const submitData = async (event) =>{
   //   event.preventDefault();
@@ -45,19 +68,20 @@ const Step1 = ({ nextStep, handleChange, values, searchCategories }) => {
 
       <div className="justify center flex w-[50%]  flex-1 flex-col space-y-6 bg-white py-12 px-4 font-[Poppins] sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="space-y-5 pt-20">
-          {searchCategories.map(({ type, id }) => {
-            (
+          {categories.map((cat) => {
+            return (
               <label
                 htmlFor="type"
-                key={id}
-                className="w-full text-secondary grid grid-cols-1"
+                key={cat.id}
+                className="grid w-full grid-cols-1 text-secondary"
               >
-                {type}
+                {cat.name}
                 <input
-                  name="type"
+                  value={cat.name}
                   type="radio"
-                  className="text-secondary flex"
-                  onChange={handleChange}
+                  name="type"
+                  className="flex text-secondary"
+                  onChange={handleChange("category")}
                 />
               </label>
             );
@@ -86,7 +110,9 @@ const Step1 = ({ nextStep, handleChange, values, searchCategories }) => {
 export default Step1;
 
 export async function getServerSideProps() {
-  const searchCategories = await fetch("http://localhost:5000/api/host/category").then(res => res.json());
+  const searchCategories = await fetch(
+    "http://localhost:5000/api/host/category"
+  ).then((res) => res.json());
   return {
     props: {
       searchCategories,
