@@ -10,6 +10,9 @@ import Step7 from "./Step7";
 import Step8 from "./Step8";
 import Step9 from "./Step9";
 import Step10 from "./Step10";
+import { storage } from "../../components/utils/firebase";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 import {
   Security,
   StdAmenities,
@@ -33,7 +36,7 @@ export default class Property extends Component {
       stdAmenities: new Array(StdAmenities.length).fill(false),
       guestFvrt: new Array(GuestFavrt.length).fill(false),
       safetyItems: new Array(SafetyItems.length).fill(false),
-      propertyImages: "",
+      propertyImages: new Array(5).fill(""),
       propTitle: "",
       propPrice: "",
       propDescription: "",
@@ -157,33 +160,35 @@ export default class Property extends Component {
     console.log("this is safety item", updatedCheckedState);
   };
 
-  handlePropImg = (event) => {
+  handlePropImg = (event, index) => {
+    console.log(index);
+
+    const newArr = { ...this.state.propertyImages };
+
+    newArr[index] = event.target.files[0];
+
     this.setState({
-      propertyImages: event.target.files[0],
+      propertyImages: newArr,
     });
+
+    console.log("this is property Image", this.state.propertyImages);
+
+    console.log("this is new array", newArr);
   };
 
-  handleImgUpload = () => {
-    const formData = new FormData(); //FormData is default javascript object
-    formData.append(
-      "image",
-      this.state.propertyImages,
-      this.state.propertyImages.name
+  handleImgUpload = (index) => {
+    console.log("image uploaded", this.state.propertyImages[index]);
+    if (this.state.propertyImages[index] === undefined)
+      return alert("image is undefined");
+
+    const imageRef = ref(
+      storage,
+      `property_images/${this.state.propertyImages[index].name + v4()}`
     );
-    axios
-      .post("IDHR END POINT AYEGA", formData, {
-        //will tell us the % amount of image that is loading
-        onUploadProgress: (progressEvent) => {
-          console.log(
-            "upload progress: " +
-              Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-              "%"
-          );
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+
+    uploadBytes(imageRef, this.state.propertyImages[index]).then(() =>
+      alert("image uploaded")
+    );
   };
 
   handlePropDocs = (event) => {
@@ -211,8 +216,14 @@ export default class Property extends Component {
       });
   };
 
+  imgList = ref(storage, "property_images/");
   componentDidMount() {
-    console.log("this is state", this.state);
+    listAll(this.imgList).then((res) => {
+      res.items.forEach((item) => {
+        getDownloadURL(item).then((url) => console.log("url", url));
+      });
+    });
+    // console.log("this is state", this.state);
   }
 
   render() {

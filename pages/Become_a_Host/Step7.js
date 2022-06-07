@@ -2,7 +2,14 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import React from "react";
 
-const Step7 = ({ prevStep,handleImgUpload, nextStep, handlePropImg, handleChange, values }) => {
+const Step7 = ({
+  prevStep,
+  handleImgUpload,
+  nextStep,
+  handlePropImg,
+  handleChange,
+  values,
+}) => {
   const router = useRouter();
   const goToStep6 = () => {
     prevStep();
@@ -42,13 +49,13 @@ const Step7 = ({ prevStep,handleImgUpload, nextStep, handlePropImg, handleChange
             />
             <div className=" space-y-2 pt-2 pb-7 text-secondary">
               <input
-               type="file"
-               className=" outline-none"
-               onChange={handlePropImg}
-               /> <br></br>
-              <button
-              onClick={handleImgUpload}
-              className="underline">
+                // value={values.propertyImages[0].name}
+                type="file"
+                className=" outline-none"
+                onChange={(e) => handlePropImg(e, 0)}
+              />{" "}
+              <br></br>
+              <button onClick={() => handleImgUpload(0)} className="underline">
                 Upload your Cover photo here
               </button>
             </div>
@@ -62,52 +69,17 @@ const Step7 = ({ prevStep,handleImgUpload, nextStep, handlePropImg, handleChange
               className="opacity-30"
             />
             <div className=" space-y-2 pt-2 pb-7 text-secondary">
-              <input 
-              type="file" 
-              className=" outline-none" 
-              onChange={handlePropImg} 
-              /> <br></br>
-              <button
-              onClick={handleImgUpload}
-              className="underline"> Upload photo </button>
-            </div>
-          </div>
-          <div className="pl-2">
-            <Image
-              src="/image.png"
-              alt="upload image"
-              height="120px"
-              width="130px"
-              className="opacity-30"
-            />
-            <div className=" space-y-2 pt-2 pb-7 text-secondary">
-              <input 
-              type="file" 
-              className=" outline-none" 
-              onChange={handlePropImg} 
-              /> <br></br>
-              <button 
-              onClick={handleImgUpload}
-              className="underline"> Upload photo </button>
-            </div>
-          </div>
-          <div className="pl-2">
-            <Image
-              src="/image.png"
-              alt="upload image"
-              height="120px"
-              width="130px"
-              className="opacity-30"
-            />
-            <div className=" space-y-2 pt-2 pb-7 text-secondary">
-              <input 
-              type="file" 
-              className=" outline-none" 
-              onChange={handlePropImg} 
-              /> <br></br>
-              <button 
-              onClick={handleImgUpload}
-              className="underline"> Upload photo </button>
+              <input
+                // value={values.propertyImages[1].name}
+                type="file"
+                className=" outline-none"
+                onChange={(e) => handlePropImg(e, 1)}
+              />{" "}
+              <br></br>
+              <button onClick={() => handleImgUpload(1)} className="underline">
+                {" "}
+                Upload photo{" "}
+              </button>
             </div>
           </div>
           <div className="pl-2">
@@ -120,13 +92,60 @@ const Step7 = ({ prevStep,handleImgUpload, nextStep, handlePropImg, handleChange
             />
             <div className=" space-y-2 pt-2 pb-7 text-secondary">
               <input
-               type="file"
+                // value={values.propertyImages[2].name}
+                type="file"
                 className=" outline-none"
-                 onChange={handlePropImg} 
-                 /> <br></br>
-              <button 
-              onClick={handleImgUpload}
-              className="underline"> Upload photo </button>
+                onChange={(e) => handlePropImg(e, 2)}
+              />{" "}
+              <br></br>
+              <button onClick={() => handleImgUpload(2)} className="underline">
+                {" "}
+                Upload photo{" "}
+              </button>
+            </div>
+          </div>
+          <div className="pl-2">
+            <Image
+              src="/image.png"
+              alt="upload image"
+              height="120px"
+              width="130px"
+              className="opacity-30"
+            />
+            <div className=" space-y-2 pt-2 pb-7 text-secondary">
+              <input
+                // value={values.propertyImages[3].name}
+                type="file"
+                className=" outline-none"
+                onChange={(e) => handlePropImg(e, 3)}
+              />{" "}
+              <br></br>
+              <button onClick={() => handleImgUpload(3)} className="underline">
+                {" "}
+                Upload photo{" "}
+              </button>
+            </div>
+          </div>
+          <div className="pl-2">
+            <Image
+              src="/image.png"
+              alt="upload image"
+              height="120px"
+              width="130px"
+              className="opacity-30"
+            />
+            <div className=" space-y-2 pt-2 pb-7 text-secondary">
+              <input
+                // value={values.propertyImages[4].name}
+                type="file"
+                className=" outline-none"
+                onChange={(e) => handlePropImg(e, 4)}
+              />{" "}
+              <br></br>
+              <button onClick={() => handleImgUpload(4)} className="underline">
+                {" "}
+                Upload photo{" "}
+              </button>
             </div>
           </div>
         </div>

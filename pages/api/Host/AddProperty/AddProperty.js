@@ -1,54 +1,69 @@
-const Prisma = require('prisma/prisma-client');
+const Prisma = require("prisma/prisma-client");
 const prisma = new Prisma.PrismaClient();
-
+const expressAsyncHandler = require("express-async-handler");
 const addProperty = async (req, res) => {
+  const {
+    category,
+    description,
+    address,
+    city,
+    guests,
+    beds,
+    bathrooms,
+    security,
+    stdAmenities,
+    guestFvrt,
+    safetyItems,
+    propertyImages,
+    propTitle,
+    propPrice,
+    propDescription,
+    propDocs,
+    CATid,
+  } = req.body;
 
-    const { category, description, address, guests, beds, bathrooms, securityCameras,
-        parkingArea, petsAllowed, smartTv, wifi, pool, fireplace, bbqGrill,
-        exerciseEquipment, poolTable, bedroomEssentials, bathroomEssentials, kitchen,
-        washingMachine, airConditioner, workSpace, fireAlarm, fireExtinguisher,
-        firstAidKit, smokeAlarm, propertyImages, propTitle, price,
-        propDescription, propDocs } = req.body;
+  const properties = await prisma.property.create({
+    data: {
+      property_categoryId: category,
+      sub_typeId: description,
+      citiesId: 3,
+      travelerId: 4,
+      hostId: 6,
+      //   address: address,
+      guests: guests,
+      beds: beds,
+      bathrooms: bathrooms,
+      security_cameras: security[0],
+      parking_area: security[1],
+      pets_allowed: security[2],
+      smart_TV: security[3],
+      wifi: security[4],
+      pool: stdAmenities[0],
+      fire_place: stdAmenities[1],
+      bbq_grill: stdAmenities[2],
+      exercise_equipment: stdAmenities[3],
+      pool_table: stdAmenities[4],
+      bedroom_essentials: guestFvrt[0],
+      bathroom_essentials: guestFvrt[1],
+      kitchen: guestFvrt[2],
+      washing_machine: guestFvrt[3],
+      air_conditioner: guestFvrt[4],
+      workspace: guestFvrt[5],
+      fire_alarm: safetyItems[0],
+      fire_extinguisher: safetyItems[1],
+      first_aid_kit: safetyItems[2],
+      smoke_alarm: safetyItems[3],
+      property_image: "kjhdfkajhs",
+      property_name: propTitle,
+      price: propPrice,
+      property_description: propDescription,
+      document: propDocs,
+      //   city: city,
+      verified: false,
+    },
+  });
 
-    const properties = await prisma.property.create({
-        data: {
-            property_categoryId: category,
-            sub_typeId: description,
-            address: address,
-            guests: guests,
-            beds: beds,
-            bathrooms: bathrooms,
-            security_cameras: securityCameras,
-            parking_area : parkingArea,
-            pets_allowed : petsAllowed,
-            smart_TV : smartTv,
-            wifi : wifi,
-            pool:pool,
-            fire_place: fireplace,
-            bbq_grill : bbqGrill,
-            exercise_equipment : exerciseEquipment,
-            pool_table : poolTable,
-            bedroom_essentials : bedroomEssentials,
-            bathroom_essentials : bathroomEssentials,
-            kitchen : kitchen,
-            washing_machine : washingMachine,
-            air_conditioner : airConditioner,
-            workspace : workSpace,
-            fire_alarm : fireAlarm,
-            fire_extinguisher : fireExtinguisher,
-            first_aid_kit : firstAidKit,
-            smoke_alarm : smokeAlarm,
-            property_image : propertyImages,
-            property_name : propTitle,
-            price: price,
-            property_description: propDescription,
-            document: propDocs,
-            verified: false,
-        }
-    })
+  res.json({ properties });
+};
 
-    res.json({ properties })
-
-}
-
-module.exports = {addProperty} 
+module.exports = { addProperty };

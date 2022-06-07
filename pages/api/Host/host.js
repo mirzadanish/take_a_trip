@@ -1,10 +1,10 @@
-const router = require('express').Router()
-const {property} = require('./AddProperty/AddProperty')
-const {category} = require('./Category/Category')
-const {subtype} = require('./Subtype/subtype')
+const router = require("express").Router();
+const { addProperty } = require("./AddProperty/AddProperty");
+const { categories } = require("./Category/Category");
+const { subtypes } = require("./Subtype/subtype");
 
-router.post('/addproperty', property)
-router.post('/category', category)
-router.post('/subtype', subtype)
+router.post("/addproperty", addProperty);
+router.post("/category", categories);
+router.post("/subtype", subtypes);
 
-module.exports = router
+module.exports = router;
