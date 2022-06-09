@@ -118,8 +118,6 @@ export default class Property extends Component {
       bathrooms: this.state.bathrooms - 1,
     });
   };
-  // Hello lass
-
   handleSecurity = (position, name) => {
     const updatedCheckedState = this.state.security.map((item, index) =>
       index === position ? !item : item

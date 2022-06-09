@@ -26,10 +26,9 @@ const addProperty = async (req, res) => {
     data: {
       property_categoryId: category,
       sub_typeId: description,
-      citiesId: 3,
       travelerId: 4,
       hostId: 6,
-      //   address: address,
+      address: address,
       guests: guests,
       beds: beds,
       bathrooms: bathrooms,
@@ -58,7 +57,7 @@ const addProperty = async (req, res) => {
       price: propPrice,
       property_description: propDescription,
       document: propDocs,
-      //   city: city,
+      city: "city",
       verified: false,
     },
   });

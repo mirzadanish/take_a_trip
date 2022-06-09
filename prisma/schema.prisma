@@ -1,199 +1,189 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model Booking {
-  id           Int      @id @default(autoincrement())
-  booking_date DateTime
-  amount       Float
-  cancel_date  DateTime
-  propertyId   Int      @unique
-  travelerId   Int
-  Property     Property @relation(fields: [propertyId], references: [id])
-  traveler     Traveler @relation(fields: [travelerId], references: [id])
-  Payment      Payment?
+    id           Int      @id @default(autoincrement())
+    booking_date DateTime
+    amount       Float
+    cancel_date  DateTime
+    propertyId   Int      @unique
+    travelerId   Int
+    Property     Property @relation(fields: [propertyId], references: [id])
+    traveler     Traveler @relation(fields: [travelerId], references: [id])
+    Payment      Payment?
 
-  @@index([travelerId], map: "booking_travelerId_fkey")
-  @@map("booking")
+    @@index([travelerId], map: "booking_travelerId_fkey")
+    @@map("booking")
 }
 
 model Host {
-  id                 Int        @id @default(autoincrement())
-  name               String     @db.VarChar(255)
-  email              String     @db.VarChar(255)
-  phone_no           Int
-  cnic               String     @db.VarChar(255)
-  property_documents String     @db.VarChar(255)
-  created            DateTime   @default(now())
-  updated            DateTime   @default(now())
-  deleted            DateTime   @default(now())
-  password           String     @db.VarChar(255)
-  confirm_password   String     @db.VarChar(255)
-  verified           Boolean
-  Login              Login?
-  payment            Payment[]
-  property           Property[]
+    id                 Int        @id @default(autoincrement())
+    name               String     @db.VarChar(255)
+    email              String     @db.VarChar(255)
+    phone_no           Int
+    cnic               String     @db.VarChar(255)
+    property_documents String     @db.VarChar(255)
+    created            DateTime   @default(now())
+    updated            DateTime
+    deleted            DateTime
+    password           String     @db.VarChar(255)
+    confirm_password   String     @db.VarChar(255)
+    verified           Boolean
+    Login              Login?
+    payment            Payment[]
+    property           Property[]
 
-  @@map("host")
+    @@map("host")
 }
 
 model Login {
-  password   String   @db.VarChar(255)
-  email      String   @db.VarChar(255)
-  id         Int      @id @default(autoincrement())
-  hostId     Int      @unique
-  travelerId Int      @unique
-  host       Host     @relation(fields: [hostId], references: [id])
-  traveler   Traveler @relation(fields: [travelerId], references: [id])
+    password   String   @db.VarChar(255)
+    email      String   @db.VarChar(255)
+    id         Int      @id @default(autoincrement())
+    hostId     Int      @unique
+    travelerId Int      @unique
+    host       Host     @relation(fields: [hostId], references: [id])
+    traveler   Traveler @relation(fields: [travelerId], references: [id])
 
-  @@map("login")
-}
-
-model Cities {
-  id       Int        @id @default(autoincrement())
-  address  String     @db.VarChar(255)
-  city     String     @db.VarChar(255)
-  Property Property[]
-
-  @@map("cities")
+    @@map("login")
 }
 
 model Payment {
-  id            Int            @id @default(autoincrement())
-  date          DateTime
-  bookingId     Int            @unique
-  hostId        Int
-  travelerId    Int
-  booking       Booking        @relation(fields: [bookingId], references: [id])
-  Host          Host           @relation(fields: [hostId], references: [id])
-  Traveler      Traveler       @relation(fields: [travelerId], references: [id])
-  payment_types Payment_type[]
+    id            Int            @id @default(autoincrement())
+    date          DateTime
+    bookingId     Int            @unique
+    hostId        Int
+    travelerId    Int
+    booking       Booking        @relation(fields: [bookingId], references: [id])
+    Host          Host           @relation(fields: [hostId], references: [id])
+    Traveler      Traveler       @relation(fields: [travelerId], references: [id])
+    payment_types Payment_type[]
 
-  @@index([hostId], map: "payment_hostId_fkey")
-  @@index([travelerId], map: "payment_travelerId_fkey")
-  @@map("payment")
+    @@index([hostId], map: "payment_hostId_fkey")
+    @@index([travelerId], map: "payment_travelerId_fkey")
+    @@map("payment")
 }
 
 model Payment_type {
-  id          Int     @id @default(autoincrement())
-  credit_card String  @db.VarChar(255)
-  jazzcash    Float
-  debit_card  String  @db.VarChar(255)
-  cash        Float
-  easypaisa   Float
-  paymentId   Int
-  Payment     Payment @relation(fields: [paymentId], references: [id])
+    id          Int     @id @default(autoincrement())
+    credit_card String  @db.VarChar(255)
+    jazzcash    Float
+    debit_card  String  @db.VarChar(255)
+    cash        Float
+    easypaisa   Float
+    paymentId   Int
+    Payment     Payment @relation(fields: [paymentId], references: [id])
 
-  @@index([paymentId], map: "payment_type_paymentId_fkey")
-  @@map("payment_type")
+    @@index([paymentId], map: "payment_type_paymentId_fkey")
+    @@map("payment_type")
 }
 
 model Property {
-  id                   Int                @id @default(autoincrement())
-  created              DateTime           @default(now())
-  updated              DateTime           @updatedAt
-  deleted              DateTime           @default(now())
-  property_image       String             @db.VarChar(255)
-  price                Int
-  property_description String
-  property_name        String             @db.VarChar(255)
-  citiesId             Int?
-  hostId               Int
-  travelerId           Int
-  property_categoryId  Int?
-  bathrooms            Int
-  beds                 Int
-  guests               Int
-  document             String             @db.VarChar(255)
-  verified             Boolean
-  air_conditioner      Boolean
-  bathroom_essentials  Boolean
-  bbq_grill            Boolean
-  bedroom_essentials   Boolean
-  exercise_equipment   Boolean
-  fire_alarm           Boolean
-  fire_extinguisher    Boolean
-  fire_place           Boolean
-  first_aid_kit        Boolean
-  kitchen              Boolean
-  parking_area         Boolean
-  pets_allowed         Boolean
-  pool                 Boolean
-  pool_table           Boolean
-  security_cameras     Boolean
-  smart_TV             Boolean
-  smoke_alarm          Boolean
-  sub_typeId           Int?
-  washing_machine      Boolean
-  wifi                 Boolean
-  workspace            Boolean
-  Cities               Cities?            @relation(fields: [citiesId], references: [id])
-  Host                 Host               @relation(fields: [hostId], references: [id])
-  Property_category    Property_category? @relation(fields: [property_categoryId], references: [id])
-  Sub_type             Sub_type?          @relation(fields: [sub_typeId], references: [id])
-  TravelerId           Traveler           @relation(fields: [travelerId], references: [id])
-  Booking              Booking?
-  property_reviews     Property_review[]
+    id                   Int                @id @default(autoincrement())
+    created              DateTime           @default(now())
+    updated              DateTime           @updatedAt
+    deleted              DateTime           @default(now())
+    property_image       String
+    price                Int
+    property_description String
+    property_name        String             @db.VarChar(255)
+    hostId               Int
+    travelerId           Int
+    address              String
+    city                 String
+    property_categoryId  Int?
+    bathrooms            Int
+    beds                 Int
+    guests               Int
+    document             String
+    verified             Boolean
+    air_conditioner      Boolean
+    bathroom_essentials  Boolean
+    bbq_grill            Boolean
+    bedroom_essentials   Boolean
+    exercise_equipment   Boolean
+    fire_alarm           Boolean
+    fire_extinguisher    Boolean
+    fire_place           Boolean
+    first_aid_kit        Boolean
+    kitchen              Boolean
+    parking_area         Boolean
+    pets_allowed         Boolean
+    pool                 Boolean
+    pool_table           Boolean
+    security_cameras     Boolean
+    smart_TV             Boolean
+    smoke_alarm          Boolean
+    sub_typeId           Int?
+    washing_machine      Boolean
+    wifi                 Boolean
+    workspace            Boolean
+    Host                 Host               @relation(fields: [hostId], references: [id])
+    Property_category    Property_category? @relation(fields: [property_categoryId], references: [id])
+    Sub_type             Sub_type?          @relation(fields: [sub_typeId], references: [id])
+    TravelerId           Traveler           @relation(fields: [travelerId], references: [id])
+    Booking              Booking?
+    property_reviews     Property_review[]
 
-  @@index([citiesId], map: "property_citiesId_fkey")
-  @@index([hostId], map: "property_hostId_fkey")
-  @@index([property_categoryId], map: "property_property_categoryId_fkey")
-  @@index([sub_typeId], map: "property_sub_typeId_fkey")
-  @@index([travelerId], map: "property_travelerId_fkey")
-  @@map("property")
+    @@index([hostId], map: "property_hostId_fkey")
+    @@index([property_categoryId], map: "property_property_categoryId_fkey")
+    @@index([sub_typeId], map: "property_sub_typeId_fkey")
+    @@index([travelerId], map: "property_travelerId_fkey")
+    @@map("property")
 }
 
 model Property_category {
-  id         Int        @id @default(autoincrement())
-  type       String     @unique
-  properties Property[]
+    id         Int        @id @default(autoincrement())
+    type       String     @unique
+    properties Property[]
 
-  @@map("property_category")
+    @@map("property_category")
 }
 
 model Sub_type {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  properties Property[]
+    id         Int        @id @default(autoincrement())
+    name       String     @unique
+    properties Property[]
 
-  @@map("sub_type")
+    @@map("sub_type")
 }
 
 model Property_review {
-  id         Int      @id @default(autoincrement())
-  rating     Int
-  text       String
-  travelerId Int
-  propertyId Int
-  property   Property @relation(fields: [propertyId], references: [id])
-  traveler   Traveler @relation(fields: [travelerId], references: [id])
+    id         Int      @id @default(autoincrement())
+    rating     Int
+    text       String
+    travelerId Int
+    propertyId Int
+    property   Property @relation(fields: [propertyId], references: [id])
+    traveler   Traveler @relation(fields: [travelerId], references: [id])
 
-  @@index([propertyId], map: "property_review_propertyId_fkey")
-  @@index([travelerId], map: "property_review_travelerId_fkey")
-  @@map("property_review")
+    @@index([propertyId], map: "property_review_propertyId_fkey")
+    @@index([travelerId], map: "property_review_travelerId_fkey")
+    @@map("property_review")
 }
 
 model Traveler {
-  id               Int               @id @default(autoincrement())
-  name             String            @db.VarChar(255)
-  email            String            @db.VarChar(255)
-  address          String            @db.VarChar(255)
-  cnic             String            @db.VarChar(255)
-  phone_no         String            @db.VarChar(255)
-  password         String            @db.VarChar(255)
-  passport         String            @db.VarChar(255)
-  verified         Boolean
-  confirm_password String            @db.VarChar(255)
-  Booking          Booking[]
-  Login            Login?
-  Payment          Payment[]
-  Properties       Property[]
-  property_reviews Property_review[]
+    id               Int               @id @default(autoincrement())
+    name             String            @db.VarChar(255)
+    email            String            @db.VarChar(255)
+    address          String            @db.VarChar(255)
+    cnic             String            @db.VarChar(255)
+    phone_no         String            @db.VarChar(255)
+    password         String            @db.VarChar(255)
+    passport         String            @db.VarChar(255)
+    verified         Boolean
+    confirm_password String            @db.VarChar(255)
+    Booking          Booking[]
+    Login            Login?
+    Payment          Payment[]
+    Properties       Property[]
+    property_reviews Property_review[]
 
-  @@map("traveler")
+    @@map("traveler")
 }
